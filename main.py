@@ -14,13 +14,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.exception_handler(HTTPException)
-async def custom_http_exception_handler(request: Request, exc: HTTPException):
-    return JSONResponse(
-        status_code=exc.status_code,
-        content={"message": exc.detail, "statusCode": exc.status_code},
-    )
-
 @app.get("/")
 def root():
     return generateResponse("Welcome to the Chat Bot API")
